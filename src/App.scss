@@ -1,0 +1,46 @@
+.App {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 1fr 5fr 1fr;
+  grid-template-areas:
+    ". . ."
+    ". tab ."
+    ". . .";
+}
+
+.Tab {
+  grid-area: tab;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 9fr;
+  grid-template-areas:
+    "nav"
+    "text";
+}
+
+.Nav {
+  grid-area: nav;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  background-color: #88c868;
+  .Button {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #7abb5a;
+    color: #ffffff;
+    border: 2px solid #7abb5a;
+    &:hover {
+      border: 2px solid #6aaa4a;
+      color: #366e1a;
+    }
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+.Text {
+  grid-area: text;
+}
