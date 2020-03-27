@@ -1,10 +1,6 @@
 import React from "react";
 import "./App.scss";
 
-let restName = "Indigo";
-let description =
-  "Located in the hotel lobby, our newly restaurant offers a large variety of Asian cuisine and is associated with perfect taste and extraordinary dishes. For this restaurant with this cool name it is not only the menu that offers the perfect taste, but the bar is something unique, complementing the food in the best way possible. In addition to the Asian spirits and the famous sake,  there is large selection of top-quality wines to choose from as well as a selection of Champaign and Prosecco. Designed to satisfy even the most exigent tastes in matter of food and drinks, the Ginger Sushi Bar & Lounge also impresses with its large open kitchen where the restaurant’s experienced Asian Chefs show their culinary talents in preparing the so healthy, nourishing and appetizing dishes.";
-
 function App() {
   return (
     <div className="App">
@@ -14,39 +10,101 @@ function App() {
 }
 
 class Tab extends React.Component {
+  constructor(props) {
+    super(props);
+    this.changeTabToHome = this.changeTabToHome.bind(this);
+    this.changeTabToMenu = this.changeTabToMenu.bind(this);
+    this.changeTabToAbout = this.changeTabToAbout.bind(this);
+    this.state = {
+      tab: Menu,
+      title: "Menu",
+      text: "Welcome to the best sushi store in town!"
+    };
+  }
+
+  changeTabToHome() {
+    this.setState({ tab: Home });
+  }
+
+  changeTabToMenu() {
+    this.setState({ tab: Menu });
+  }
+
+  changeTabToAbout() {
+    this.setState({ tab: About });
+  }
+
   render() {
     return (
       <div className="Tab">
-        <Nav></Nav>
-        <Content name={restName} text={description}></Content>
+        <div className="Buttons">
+          <Button onBtnPress={this.changeTabToHome} name="Home"></Button>
+          <Button onBtnPress={this.changeTabToMenu} name="Menu"></Button>
+          <Button onBtnPress={this.changeTabToAbout} name="About"></Button>
+        </div>
+        <Content
+          tab={this.state.tab}
+          title={this.state.title}
+          text={this.state.text}
+        ></Content>
       </div>
     );
   }
 }
 
-class Nav extends React.Component {
-  render() {
-    return (
-      <div className="Nav">
-        <Btns name="Home"></Btns>
-        <Btns name="Menu"></Btns>
-        <Btns name="About"></Btns>
-      </div>
-    );
+class Button extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
-}
 
-class Btns extends React.Component {
+  handleClick(e) {
+    this.props.onBtnPress(e.target.value);
+  }
+
   render() {
-    return <button className="Button">{this.props.name}</button>;
+    return <button onClick={this.handleClick}>{this.props.name}</button>;
   }
 }
 
 class Content extends React.Component {
   render() {
     return (
+      <this.props.tab
+        title={this.props.title}
+        text={this.props.text}
+      ></this.props.tab>
+    );
+  }
+}
+
+class Home extends React.Component {
+  render() {
+    return (
       <div className="Home">
-        <h1>{this.props.name}</h1>
+        <h1>{this.props.title}</h1>
+        <p>{this.props.text}</p>
+      </div>
+    );
+  }
+}
+
+class Menu extends React.Component {
+  render() {
+    return (
+      <div className="Menu">
+        <h1>{this.props.title}</h1>
+        <p>{this.props.text}</p>
+      </div>
+    );
+  }
+}
+
+class About extends React.Component {
+  render() {
+    return (
+      <div className="About">
+        <h1>{this.props.title}</h1>
         <p>{this.props.text}</p>
       </div>
     );

@@ -19,13 +19,13 @@
     "text";
 }
 
-.Nav {
+.Buttons {
   grid-area: nav;
   display: flex;
   flex-direction: row;
   align-content: center;
   background-color: #88c868;
-  .Button {
+  button {
     cursor: pointer;
     font-weight: bold;
     background-color: #7abb5a;
@@ -41,6 +41,8 @@
   }
 }
 
-.Text {
+.Home,
+.Menu,
+.About {
   grid-area: text;
 }
